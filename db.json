@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "name": "Shree Chavan",
+      "email": "admin@me.com",
+      "password": "123",
+      "id": 1
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "name": "EcoFriendly Skincare",
+      "description": "Organic and sustainable skincare products.",
+      "logo": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 2,
+      "name": "Handmade Furniture Co.",
+      "description": "Elegant handmade furniture for your home.",
+      "logo": "https://via.placeholder.com/150"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Natural Face Cream",
+      "description": "Soothing cream made from organic ingredients.",
+      "category": "Skincare",
+      "price": 25.99,
+      "image": "https://via.placeholder.com/150",
+      "brandId": 1
+    },
+    {
+      "id": 2,
+      "name": "Recycled Wood Table",
+      "description": "Handcrafted table made from recycled wood.",
+      "category": "Furniture",
+      "price": 299.99,
+      "image": "https://via.placeholder.com/150",
+      "brandId": 2
+    }
+  ]
+}
