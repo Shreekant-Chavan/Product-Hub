@@ -1,24 +1,54 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
   // Creating States for Form inputs and Messages
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signupSuccess, setSignupSuccess] = useState("");
-  const [signupFailed, setSignupFailed] = useState("");
+  const [statusMessage, setStatusMessage] = useState({
+    type: "", // "success" or "error"
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // Handling form submission
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent form reload
+    if (isSubmitting) return; // Prevent multiple submissions
 
-    const newUser = {
-      name,
-      email,
-      password,
-    };
+    // Validating form inputs
+    if (!name || !email || !password) {
+      setStatusMessage({ type: "error", message: "Please fill all fields" });
+      return;
+    }
+    setIsSubmitting(true); // Disable from while submitting
 
     try {
+      // Check for Existing User
+      const existingUserResponse = await fetch(
+        `http://localhost:5173/users?email=${email}`
+      );
+
+      const existingUser = await existingUserResponse.json();
+
+      if (existingUser.length > 0) {
+        setStatusMessage({
+          type: "error",
+          message: "Email already in use. Please use a different email.",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Create new user
+      const newUser = {
+        name,
+        email,
+        password,
+      };
+
       // Send post request to JSON Server
       const response = await fetch("http://localhost:5173/users", {
         method: "POST",
@@ -26,49 +56,40 @@ const Signup = () => {
         body: JSON.stringify(newUser),
       });
       if (response.ok) {
-        ("User registered successfully!");
-        // After success Clearing all input forms
-        setSignupFailed("");
-        setName("");
-        setEmail("");
-        setPassword("");
-
-        // Creating Aleart for successfully Sign-up
-
-        alert("Account created Successfully! Redirecting to Login Page");
+        setStatusMessage({
+          type: success,
+          message: "Account created Successfully! Redirecting to Login Page",
+        });
 
         // Redirect to login page
         setTimeout(() => {
-          window.location.href = "/login";
+          navigate("/login");
         }, 1800);
-      } else {
-        setSignupFailed("Failed to register user. Please try again!");
 
-        // Clearing all input forms after failure
+        // After success Clearing all input forms
         setName("");
         setEmail("");
         setPassword("");
+      } else {
+        setStatusMessage({
+          type: error,
+          message: "Failed to register user. Please try again!",
+        });
 
-        // Clearing all input forms after failure
-        setTimeout(() => {
-          setSignupFailed("");
-        }, 2000);
+        // // Clearing all input forms after failure
+        // setName("");
+        // setEmail("");
+        // setPassword("");
       }
     } catch (error) {
       console.error("Error:", error);
-      setSignupFailed("Failed to register user. Please try again!");
-      setSignupSuccess("");
-      // Clearing all input forms after failure
-      setTimeout(() => {
-        setSignupFailed("");
-      }, 2000);
+      setStatusMessage({
+        type: error,
+        message: "An error occurred. Please try again later.",
+      });
     }
 
-    // Validating form inputs
-    if (!name || !email || !password) {
-      setSignupFailed("Please fill in all fields");
-      return;
-    }
+    setIsSubmitting(false); // Re-enable form after submission
   };
   return (
     <div className="h-screen w-screen pt-10 bg-[#1c1c1c]">
@@ -122,33 +143,34 @@ const Signup = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded font-semibold"
+            disabled={isSubmitting}
+            className={`w-full ${
+              isSubmitting
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            } px-4 py-2 rounded font-semibold`}
           >
-            Sign up
+            {isSubmitting ? "Signing up..." : "Sign up"}
           </button>
         </form>
         <div className="flex items-center justify-center">
           <p className="pt-5">
             Already have an account?
-            <a
-              className="font-semibold underline pl-2 hover:text-gray-300"
-              href="/login"
-            >
+            <Link to="/login" className="text-indigo-500 ml-1">
               Login!
-            </a>
+            </Link>
           </p>
         </div>
       </div>
 
-      {signupSuccess && (
-        <div className="text-center text-green-500 mt-5 font-semibold text-lg">
-          {signupSuccess}
-        </div>
-      )}
-      {signupFailed && (
-        <div className="text-center text-red-500 mt-5 font-semibold text-lg">
-          {signupFailed}
-        </div>
+      {statusMessage && (
+        <div
+          className={`text-center mt-5 font-semibold text-lg ${
+            setStatusMessage.type === "success"
+              ? "text-green-500"
+              : "text-red-500"
+          }`}
+        ></div>
       )}
     </div>
   );

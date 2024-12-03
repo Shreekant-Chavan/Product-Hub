@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   // Creating States for Form inputs and Messages
@@ -6,10 +7,13 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loginSuccess, setLoginSuccess] = useState("");
   const [loginFailed, setLoginFailed] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // Handling form submission
   const handleLogin = async (event) => {
     event.preventDefault(); // Prevent form reload
+    if (isSubmitting) return; // Prevent multiple submissions
 
     try {
       // Fetch users from JSON Server
@@ -29,14 +33,24 @@ function Login() {
         // Storing user information in local storage for future use
         localStorage.setItem("loggedInUser", JSON.stringify(user));
 
-        setEmail("");
-        setPassword("");
+        // setEmail("");
+        // setPassword("");
+
+        setTimeout(() => {
+          navigate("/dashboard"); // Redirecting to dashboard after successful login
+        }, 1500);
       } else {
         // If user not found, login failed message!
         setLoginFailed("Invalid email or password!");
         setLoginSuccess("");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      setLoginFailed("An error occurred while logging in. Please try again");
+      setLoginSuccess("");
+    }
+
+    setIsSubmitting(false);
   };
 
   return (
@@ -77,20 +91,22 @@ function Login() {
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded font-semibold"
+            disabled={isSubmitting}
+            className={`w-full ${
+              isSubmitting
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            } px-4 py-2 rounded font-semibold`}
           >
-            Login
+            {isSubmitting ? "Logging in..." : "Login"}
           </button>
         </form>
         <div className="flex items-center justify-center">
           <p className="pt-5">
             Don't have an account?
-            <a
-              className="font-semibold underline pl-2 hover:text-gray-300"
-              href="/signup"
-            >
+            <Link to="/signup" className="text-indigo-500 ml-1">
               Sign up!
-            </a>
+            </Link>
           </p>
         </div>
       </div>
