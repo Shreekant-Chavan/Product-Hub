@@ -4,18 +4,18 @@
       "name": "Shree Chavan",
       "email": "admin@me.com",
       "password": "123",
-      "id": 1
+      "id": "1"
     }
   ],
   "brands": [
     {
-      "id": 1,
+      "id": "1",
       "name": "EcoFriendly Skincare",
       "description": "Organic and sustainable skincare products.",
       "logo": "https://via.placeholder.com/150"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Handmade Furniture Co.",
       "description": "Elegant handmade furniture for your home.",
       "logo": "https://via.placeholder.com/150"
@@ -23,7 +23,7 @@
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Natural Face Cream",
       "description": "Soothing cream made from organic ingredients.",
       "category": "Skincare",
@@ -33,7 +33,7 @@
       "brandId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Recycled Wood Table",
       "description": "Handcrafted table made from recycled wood.",
       "category": "Furniture",
@@ -43,22 +43,20 @@
       "brandId": 2
     },
     {
-      "id": 1733351687639,
+      "id": 1733433456079,
       "name": "New Product",
-      "brand": "Unknown",
       "category": "Unknown",
       "stock": 100,
       "price": "599.00",
       "image": "https://via.placeholder.com/50"
     },
     {
-      "id": "5e7e",
-      "name": "Hello",
-      "description": "Hi",
-      "category": "Sports",
-      "stock": "5",
-      "price": "599",
-      "image": ""
+      "id": 1733433933366,
+      "name": "New Product",
+      "category": "Unknown",
+      "stock": 100,
+      "price": "599.00",
+      "image": "https://via.placeholder.com/50"
     }
   ]
 }

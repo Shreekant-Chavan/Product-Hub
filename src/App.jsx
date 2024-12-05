@@ -3,16 +3,16 @@ import "./index.css";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Product from "./pages/Product";
 import AddProduct from "./components/Products/AddProduct";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
     <>
-    {/* <AddProduct /> */}
-      <Dashboard>
-        <Product />
-      </Dashboard>
+    <AddProduct />
+      {/* <Dashboard>
+        <ProductPage />
+      </Dashboard> */}
       {/* <Login /> */}
       {/* <Signup /> */}
     </>

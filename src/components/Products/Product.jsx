@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
-import DashboardPage from "./DashboardPage";
+import ProductPage from "../../pages/ProductPage";
 
-function Dashboard() {
+function Product() {
   return (
     <div className="flex h-screen">
       <Navbar />
@@ -14,12 +14,12 @@ function Dashboard() {
         {/* Header */}
 
         <main className="flex-1 overflow-y-auto bg-gray-100">
-          <DashboardPage/>
+          <ProductPage />
         </main>
         {/* Main Content */}
       </div>
     </div>
-  );
+  )
 }
 
-export default Dashboard;
+export default Product
