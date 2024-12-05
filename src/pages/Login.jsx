@@ -17,7 +17,7 @@ function Login() {
 
     try {
       // Fetch users from JSON Server
-      const response = await fetch("http://localhost:5173/users");
+      const response = await fetch("http://localhost:3001/users");
       const users = await response.json();
 
       // Find user in the fetched users array based on email and password

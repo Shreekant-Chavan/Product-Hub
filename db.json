@@ -27,8 +27,9 @@
       "name": "Natural Face Cream",
       "description": "Soothing cream made from organic ingredients.",
       "category": "Skincare",
+      "stock": 99,
       "price": 25.99,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://via.placeholder.com/50",
       "brandId": 1
     },
     {
@@ -36,9 +37,28 @@
       "name": "Recycled Wood Table",
       "description": "Handcrafted table made from recycled wood.",
       "category": "Furniture",
+      "stock": 50,
       "price": 299.99,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://via.placeholder.com/50",
       "brandId": 2
+    },
+    {
+      "id": 1733351687639,
+      "name": "New Product",
+      "brand": "Unknown",
+      "category": "Unknown",
+      "stock": 100,
+      "price": "599.00",
+      "image": "https://via.placeholder.com/50"
+    },
+    {
+      "id": "5e7e",
+      "name": "Hello",
+      "description": "Hi",
+      "category": "Sports",
+      "stock": "5",
+      "price": "599",
+      "image": ""
     }
   ]
 }

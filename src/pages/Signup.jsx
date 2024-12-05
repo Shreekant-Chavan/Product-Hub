@@ -28,7 +28,7 @@ const Signup = () => {
     try {
       // Check for Existing User
       const existingUserResponse = await fetch(
-        `http://localhost:5173/users?email=${email}`
+        `http://localhost:3001/users?email=${email}`
       );
 
       const existingUser = await existingUserResponse.json();
@@ -50,7 +50,7 @@ const Signup = () => {
       };
 
       // Send post request to JSON Server
-      const response = await fetch("http://localhost:5173/users", {
+      const response = await fetch("http://localhost:3001/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),

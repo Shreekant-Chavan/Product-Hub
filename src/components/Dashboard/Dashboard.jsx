@@ -1,26 +1,12 @@
 import React from "react";
 import {BellIcon} from "@heroicons/react/outline"
 import Product from "../../pages/Product";
+import Navbar from "../Navbar/Navbar";
 
 function Dashboard() {
   return <div className="flex h-screen">
     {/* Sidebar */}
-    <aside className="w-64 bg-gray-900 text-white flex flex-col">
-    <div className="p-6 text-lg font-bold text-center">Product Hub</div>
-    <nav className="flex-1">
-        <ul>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Dashboard</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer bg-blue-600">Products</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Customer</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Category</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Orders</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Coupons</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Chats</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Setting</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Logout</li>
-        </ul>
-    </nav>
-    </aside>
+    <Navbar/>
     {/* Main Content */}
     <div className="flex-1 bg-gray-100">
         <header className="bg-white shadow p-4 flex justify-between items-center">

@@ -4,10 +4,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Product from "./pages/Product";
+import AddProduct from "./components/Products/AddProduct";
 
 function App() {
   return (
     <>
+    {/* <AddProduct /> */}
       <Dashboard>
         <Product />
       </Dashboard>
