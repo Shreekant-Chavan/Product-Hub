@@ -41,22 +41,6 @@
       "price": 299.99,
       "image": "https://via.placeholder.com/50",
       "brandId": 2
-    },
-    {
-      "id": 1733433456079,
-      "name": "New Product",
-      "category": "Unknown",
-      "stock": 100,
-      "price": "599.00",
-      "image": "https://via.placeholder.com/50"
-    },
-    {
-      "id": 1733433933366,
-      "name": "New Product",
-      "category": "Unknown",
-      "stock": 100,
-      "price": "599.00",
-      "image": "https://via.placeholder.com/50"
     }
   ]
 }

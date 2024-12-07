@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // const products = [
 //   {
@@ -23,6 +24,7 @@ import React, { useState, useEffect } from "react";
 function ProductPage() {
   const [products, setProducts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   // Checks for is User logged in or not
   useEffect(() => {
@@ -57,27 +59,16 @@ function ProductPage() {
   };
 
   return (
-    <div className="p-4 bg-gray-100 w-full">
+    <div className="p-4 bg-gray-400 w-full">
       <div>
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold">Products</h1>
-          {isLoggedIn && (
-            <button
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-              onClick={() =>
-                addProducts({
-                  id: Date.now(),
-                  name: "New Product",
-                  category: "Unknown",
-                  stock: 100,
-                  price: "599.00",
-                  image: "https://via.placeholder.com/50",
-                })
-              }
-            >
-              + Add Product
-            </button>
-          )}
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg"
+            onClick={() => navigate("/products/add-product")}
+          >
+            + Add Product
+          </button>
         </div>
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <table className="min-w-full text-left">
@@ -98,6 +89,9 @@ function ProductPage() {
                 <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Price
                 </th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Edit / Delete
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -115,6 +109,24 @@ function ProductPage() {
                   <td className="px-6 py-3 text-center">{product.category}</td>
                   <td className="px-6 py-3 text-center">{product.stock}</td>
                   <td className="px-6 py-3 text-center">{product.price}</td>
+                  <td className="px-6 py-3 text-center">
+                    <button
+                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                      onClick={() =>
+                        navigate(`/products/edit-product/${product.id}`)
+                      }
+                    >
+                      Edit
+                    </button>{" "}
+                    <button
+                      className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                      onClick={() =>
+                        navigate(`/products/edit-product/${product.id}`)
+                      }
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

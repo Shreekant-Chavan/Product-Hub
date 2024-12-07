@@ -5,11 +5,13 @@ import Signup from "./pages/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
 import AddProduct from "./components/Products/AddProduct";
 import ProductPage from "./pages/ProductPage";
+import EditProduct from "./components/Products/EditProduct";
 
 function App() {
   return (
     <>
-    <AddProduct />
+    {/* <AddProduct /> */}
+    <EditProduct />
       {/* <Dashboard>
         <ProductPage />
       </Dashboard> */}

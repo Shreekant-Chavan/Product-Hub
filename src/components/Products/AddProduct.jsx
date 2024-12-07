@@ -1,25 +1,25 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    // State to manage product data
+  // State to manage product data
 
-    const [product, setProduct] = useState({
-      name: "",
-      description: "",
-      category: "",
-      stock: "",
-      price: "",
-      image: "",
-    });
+  const [product, setProduct] = useState({
+    name: "",
+    description: "",
+    category: "",
+    stock: "",
+    price: "",
+    image: "",
+  });
 
-    //   Handle input change
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setProduct((prev) => ({...product, [name]: value }));
-    }
+  //   Handle input change
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setProduct((prev) => ({ ...product, [name]: value }));
+  };
 
   //   Handle form Submission
 
@@ -37,7 +37,7 @@ function AddProduct() {
 
       if (response.ok) {
         alert("Product added successfully!");
-        navigate("/dashboard/products");
+        navigate("/products");
       } else {
         alert("Failed to add product. Please try again.");
       }
@@ -67,11 +67,9 @@ function AddProduct() {
           <label className="block text-gray-700 font-medium mb-2">
             Description:
             <textarea
-              type="text"
               name="description"
               value={product.description}
               onChange={handleChange}
-              required
               rows="3"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             ></textarea>

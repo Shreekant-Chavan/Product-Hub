@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
 import ProductPage from "../../pages/ProductPage";
@@ -13,13 +13,13 @@ function Product() {
         <Header />
         {/* Header */}
 
-        <main className="flex-1 overflow-y-auto bg-gray-100">
+        <main className="flex-1 overflow-y-auto bg-gray-400">
           <ProductPage />
         </main>
         {/* Main Content */}
       </div>
     </div>
-  )
+  );
 }
 
-export default Product
+export default Product;

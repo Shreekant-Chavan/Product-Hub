@@ -13,8 +13,8 @@ function Dashboard() {
         <Header />
         {/* Header */}
 
-        <main className="flex-1 overflow-y-auto bg-gray-100">
-          <DashboardPage/>
+        <main className="flex-1 overflow-y-auto bg-gray-400">
+          <DashboardPage />
         </main>
         {/* Main Content */}
       </div>

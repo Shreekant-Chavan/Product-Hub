@@ -1,11 +1,11 @@
 import React from "react";
-import {BellIcon} from "@heroicons/react/outline"
+import { BellIcon } from "@heroicons/react/outline";
 import Product from "../../pages/ProductPage";
 
 function Header() {
   return (
     <div className=" bg-gray-100">
-      <header className="w-full bg-white shadow p-4 flex justify-between items-center">
+      <header className="w-full bg-gray-100 shadow p-4 flex justify-between items-center">
         <input
           type="text"
           placeholder="Search something here"
