@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 // const products = [
 //   {
@@ -22,6 +22,8 @@ import { useNavigate } from "react-router-dom";
 //   },
 // ];
 function ProductPage() {
+  const outletContext = useOutletContext() || {}; // Fallback to an empty object
+  const { searchTerm = "" } = outletContext; // Provide default value
   const [products, setProducts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -58,6 +60,11 @@ function ProductPage() {
     setProducts((prev) => [...prev, createProduct]);
   };
 
+  // Filter products based on Search Term
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="p-4 bg-gray-400 w-full">
       <div>
@@ -70,68 +77,74 @@ function ProductPage() {
             + Add Product
           </button>
         </div>
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <table className="min-w-full text-left">
-            <thead>
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Product
-                </th>
-                {/* <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+        {filteredProducts.length > 0 ? (
+          <div className="bg-white rounded-lg shadow overflow-hidden">
+            <table className="min-w-full text-left">
+              <thead>
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Product
+                  </th>
+                  {/* <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Brand
               </th> */}
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Category
-                </th>
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Stock
-                </th>
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Price
-                </th>
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Edit / Delete
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id} className="border-b">
-                  <td className="px-6 py-3 text-center flex items-center justify-start">
-                    <img
-                      className="pr-2 w=12 h=12 object-cover rounded"
-                      src={product.image}
-                      alt={product.name}
-                    />{" "}
-                    <span>{product.name}</span>
-                  </td>
-                  {/* <td className="px-6 py-3 text-center">{product.brand}</td> */}
-                  <td className="px-6 py-3 text-center">{product.category}</td>
-                  <td className="px-6 py-3 text-center">{product.stock}</td>
-                  <td className="px-6 py-3 text-center">{product.price}</td>
-                  <td className="px-6 py-3 text-center">
-                    <button
-                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                      onClick={() =>
-                        navigate(`/products/edit-product/${product.id}`)
-                      }
-                    >
-                      Edit
-                    </button>{" "}
-                    <button
-                      className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                      onClick={() =>
-                        navigate(`/products/edit-product/${product.id}`)
-                      }
-                    >
-                      Delete
-                    </button>
-                  </td>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Category
+                  </th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Stock
+                  </th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Price
+                  </th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Edit / Delete
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {filteredProducts.map((product) => (
+                  <tr key={product.id} className="border-b">
+                    <td className="px-6 py-3 text-center flex items-center justify-start">
+                      <img
+                        className="pr-2 w=12 h=12 object-cover rounded"
+                        src={product.image}
+                        alt={product.name}
+                      />{" "}
+                      <span>{product.name}</span>
+                    </td>
+                    {/* <td className="px-6 py-3 text-center">{product.brand}</td> */}
+                    <td className="px-6 py-3 text-center">
+                      {product.category}
+                    </td>
+                    <td className="px-6 py-3 text-center">{product.stock}</td>
+                    <td className="px-6 py-3 text-center">{product.price}</td>
+                    <td className="px-6 py-3 text-center">
+                      <button
+                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                        onClick={() =>
+                          navigate(`/products/edit-product/${product.id}`)
+                        }
+                      >
+                        Edit
+                      </button>{" "}
+                      <button
+                        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                        onClick={() =>
+                          navigate(`/products/edit-product/${product.id}`)
+                        }
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p>No products found</p>
+        )}
       </div>
     </div>
   );

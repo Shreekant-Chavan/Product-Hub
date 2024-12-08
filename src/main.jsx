@@ -13,10 +13,11 @@ import Customers from "./components/Customers/Customers.jsx";
 import EditProduct from "./components/Products/EditProduct.jsx";
 import AddProduct from "./components/Products/AddProduct.jsx";
 
+
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
-      {/* <Route path="/" element={<App />} /> */}
+      <Route path="/" element={<App />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />

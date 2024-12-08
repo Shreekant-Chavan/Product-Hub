@@ -2,7 +2,11 @@ import React from "react";
 import { BellIcon } from "@heroicons/react/outline";
 import Product from "../../pages/ProductPage";
 
-function Header() {
+function Header({ onSearch }) {
+
+  const handleSearch = (query)=> {
+    onSearch(query)
+  }
   return (
     <div className=" bg-gray-100">
       <header className="w-full bg-gray-100 shadow p-4 flex justify-between items-center">
@@ -10,6 +14,7 @@ function Header() {
           type="text"
           placeholder="Search something here"
           className="border rounded-lg p-2 w-1/3 hover:border-gray-500"
+          onChange={(event)=> handleSearch(event.target.value)}
         />
         <div className="flex items-center space-x-4 pr-3">
           <span className="relative">

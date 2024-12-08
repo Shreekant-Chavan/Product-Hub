@@ -1,44 +1,29 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import "./index.css";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Dashboard from "./components/Dashboard/Dashboard";
-import AddProduct from "./components/Products/AddProduct";
-import ProductPage from "./pages/ProductPage";
-import EditProduct from "./components/Products/EditProduct";
+import Header from "./components/Header/Header";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Layout from "./Layout";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  React.useEffect(()=>{
+    console.log(searchTerm)
+  },[searchTerm, setSearchTerm])
   return (
-    <>
-    {/* <AddProduct /> */}
-    <EditProduct />
-      {/* <Dashboard>
-        <ProductPage />
-      </Dashboard> */}
-      {/* <Login /> */}
-      {/* <Signup /> */}
-    </>
+    <div className="flex h-screen">
+      <Navbar />
+
+      <div className="flex-1 flex flex-col">
+        <Header onSearch={(query)=> setSearchTerm(query)} />
+        <main className="flex-1 overflow-y-auto bg-gray-400">
+          <Outlet context={{ searchTerm }} />
+          <Layout />
+        </main>
+      </div>
+    </div>
   );
 }
 
 export default App;
-
-{
-  /* <h1>Product Hub</h1>
-    <p>Welcome to your product hub!</p>
-    <button onClick={() => {
-      localStorage.setItem('isLoggedIn', 'true');
-    }}>Login</button>
-    <button onClick={() => {
-      localStorage.setItem('isLoggedIn', 'false');
-    }}>Logout</button>
-    {localStorage.getItem('isLoggedIn') === 'true' && <Dashboard />}
-    {localStorage.getItem('isLoggedIn') === 'false' && <Login />}
-    {localStorage.getItem('isLoggedIn') === 'false' && <Signup />}
-    <button onClick={() => {
-      localStorage.removeItem('isLoggedIn');
-    }}>Clear Local Storage</button>
-    <button onClick={() => {
-      window.location.reload();
-    }}>Refresh Page</button> */
-}

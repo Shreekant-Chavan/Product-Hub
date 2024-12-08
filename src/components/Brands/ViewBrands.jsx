@@ -13,6 +13,26 @@ function ViewBrands() {
     }
   };
 
+  // Delete a brand from the server
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3001/brands/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete brand");
+      }
+
+      // Updating state after deletion
+      setBrands(brands.filter((brand) => brand.id !== id));
+      alert("Brand deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting brand:", error);
+      alert("Failed to delete the brand. Please try again.");
+    }
+  };
+
   useEffect(() => {
     fetchBrands();
   }, []);
@@ -35,6 +55,10 @@ function ViewBrands() {
               {brand.name}
             </h3>
             <p className="mt-2 text-gray-600">{brand.description}</p>
+            <button
+              className="mt-4 inline-flex justify-center w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none"
+              onClick={() => handleDelete(brand.id)}
+            >Delete</button>
           </div>
         ))}
       </div>

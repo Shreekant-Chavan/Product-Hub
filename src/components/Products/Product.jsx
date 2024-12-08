@@ -10,7 +10,7 @@ function Product() {
       {/* Sidebar */}
 
       <div className="flex-1 flex flex-col">
-        <Header />
+        <Header onSearch={() => {}}/>
         {/* Header */}
 
         <main className="flex-1 overflow-y-auto bg-gray-400">
