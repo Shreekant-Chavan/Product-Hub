@@ -4,15 +4,14 @@ import ViewBrands from "./ViewBrands";
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
 
-
-function Brands() {
+function Brands({ searchQuery }) {
   const [brands, setBrands] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = (term) => {
-    // console.log("Search Term:", term);
-    setSearchTerm(term); // Update the search term
-  };
+  // const handleSearch = (term) => {
+  //   // console.log("Search Term:", term);
+  //   setSearchTerm(term); // Update the search term
+  // };
 
   // fetching brands from db.json
   const fetchBrands = async () => {
@@ -30,9 +29,13 @@ function Brands() {
   }, []);
 
   // Filter brands based on search term
-  const filteredBrands = brands.filter((brand) =>
-    brand.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredBrands = brands.filter((brand) => {
+    if (searchQuery) {
+      return brand.name.toLowerCase().includes(searchQuery?.toLowerCase());
+    } else {
+      return brand;
+    }
+  });
 
   return (
     // <div className="min-h-screen flex bg-gray-300">
@@ -50,12 +53,16 @@ function Brands() {
       {/* Sidebar */}
 
       <div className="flex-1 flex flex-col">
-        <Header onSearch={handleSearch}/>
+        <Header onSearch={(query) => setSearchTerm(query)} />
         {/* Header */}
 
         <main className="flex-1 overflow-y-auto bg-gray-400">
           <AddBrands fetchBrands={fetchBrands} />
-          <ViewBrands brands={filteredBrands} />
+          <ViewBrands
+            brands={filteredBrands}
+            fetchBrands={fetchBrands}
+            searchQuery={searchTerm}
+          />
         </main>
         {/* Main Content */}
       </div>

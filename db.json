@@ -11,6 +11,18 @@
       "name": "Hello",
       "email": "hello@a.com",
       "password": "123"
+    },
+    {
+      "id": "9f85",
+      "name": "User 1",
+      "email": "hello1@a.com",
+      "password": "123"
+    },
+    {
+      "id": "ded3",
+      "name": "User 2",
+      "email": "hello2@a.com",
+      "password": "123"
     }
   ],
   "brands": [
@@ -34,7 +46,7 @@
       "description": "Soothing cream made from organic ingredients.",
       "category": "Skincare",
       "stock": 99,
-      "price": 25.99,
+      "price": "499",
       "image": "https://via.placeholder.com/50",
       "brandId": 1
     },
@@ -44,7 +56,7 @@
       "description": "Handcrafted table made from recycled wood.",
       "category": "Furniture",
       "stock": 50,
-      "price": 299.99,
+      "price": "9999.99",
       "image": "https://via.placeholder.com/50",
       "brandId": 2
     }

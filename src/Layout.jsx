@@ -16,6 +16,10 @@ function Layout() {
         /> */}
       </header>
       <Outlet context={{ searchTerm }} />
+
+      <main className="flex-1 overflow-y-auto bg-gray-400">
+        
+        </main>
     </div>
   )
 }

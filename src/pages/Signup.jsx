@@ -57,8 +57,8 @@ const Signup = () => {
       });
       if (response.ok) {
         setStatusMessage({
-          type: success,
-          message: "Account created Successfully! Redirecting to Login Page",
+          type: "success",
+          message: "Account created Successfully! Redirecting to Login Page...",
         });
 
         // Redirect to login page
@@ -72,7 +72,7 @@ const Signup = () => {
         setPassword("");
       } else {
         setStatusMessage({
-          type: error,
+          type: "error",
           message: "Failed to register user. Please try again!",
         });
 
@@ -84,7 +84,7 @@ const Signup = () => {
     } catch (error) {
       console.error("Error:", error);
       setStatusMessage({
-        type: error,
+        type: "error",
         message: "An error occurred. Please try again later.",
       });
     }
@@ -163,14 +163,16 @@ const Signup = () => {
         </div>
       </div>
 
-      {statusMessage && (
+      {statusMessage.message && (
         <div
           className={`text-center mt-5 font-semibold text-lg ${
-            setStatusMessage.type === "success"
+            statusMessage.type === "success"
               ? "text-green-500"
               : "text-red-500"
           }`}
-        ></div>
+        >
+          {statusMessage.message}
+        </div>
       )}
     </div>
   );

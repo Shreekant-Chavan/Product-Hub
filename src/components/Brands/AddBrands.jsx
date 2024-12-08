@@ -12,7 +12,7 @@ function AddBrands({ fetchBrands }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!brand.name || !brand.description || !brand.logo) {
+    if (!brand.name || !brand.description) {
       setError("Please fill out fields");
       return;
     }
@@ -20,13 +20,11 @@ function AddBrands({ fetchBrands }) {
     // Adding data call to add the brand to the database
     try {
       setError(""); // Reset Error
-      // Convert the logo file to a Base64 string
-      const truncatedLogo = brand.logo.slice(0, 10) + "...(truncated)";
 
       const newBrand = {
         name: brand.name,
         description: brand.description,
-        logo: truncatedLogo, // Use Base64 string as logo
+        logo: brand.logo, // Use Base64 string as logo
       };
       const response = await fetch("http://localhost:3001/brands", {
         method: "POST",
@@ -41,11 +39,14 @@ function AddBrands({ fetchBrands }) {
       }
 
       alert("Brand added successfully!");
+
+      // Reset the form fields
       setBrand({
         name: "",
         description: "",
-        logo: "",
+        logo: null,
       });
+
       if (fileInputRef.current) fileInputRef.current.value = ""; // Reset file input field
       if (fetchBrands) fetchBrands(); // Refresh the brand List
     } catch (error) {

@@ -1,29 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-// const products = [
-//   {
-//     id: 1,
-//     name: "Air Force 1",
-//     brand: "Nike",
-//     category: "Shoes",
-//     stock: 220,
-//     price: "$122.27",
-//     image: "https://via.placeholder.com/50",
-//   },
-//   {
-//     id: 2,
-//     name: "Sportswear Heritage86",
-//     brand: "Nike",
-//     category: "Caps",
-//     stock: 999,
-//     price: "$15.95",
-//     image: "https://via.placeholder.com/50",
-//   },
-// ];
-function ProductPage() {
-  const outletContext = useOutletContext() || {}; // Fallback to an empty object
-  const { searchTerm = "" } = outletContext; // Provide default value
+function ProductPage({ searchQuery }) {
   const [products, setProducts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -61,9 +39,13 @@ function ProductPage() {
   };
 
   // Filter products based on Search Term
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProducts = products.filter((product) => {
+    if (searchQuery) {
+      return product.name.toLowerCase().includes(searchQuery?.toLowerCase());
+    } else {
+      return product;
+    }
+  });
 
   return (
     <div className="p-4 bg-gray-400 w-full">

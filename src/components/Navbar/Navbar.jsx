@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
   return (
     <aside className="w-64 bg-gray-900 text-white flex flex-col h-screen">
-      <div className="p-6 text-lg font-bold text-center">Product Hub</div>
+      <div className="p-6 text-lg font-bold text-center"> <NavLink to="/">Product Hub</NavLink></div>
       <nav className="flex-1">
         <ul>
           <li>
